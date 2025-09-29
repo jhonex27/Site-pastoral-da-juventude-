@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PJ - Diocese de Coari</title>
+    <style>
+        /* Reset e configurações gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #1a5fb4;
+            --secondary-color: #e95420;
+            --light-color: #f6f5f4;
+            --dark-color: #333;
+            --success-color: #26a269;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Seções principais */
+        section {
+            padding: 5rem 0;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(26, 95, 180, 0.8), rgba(26, 95, 180, 0.9)), url('https://source.unsplash.com/random/1600x900/?youth,church') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 10rem 0;
+            margin-top: 70px;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #c34113;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        /* Sobre */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Documentos */
+        .documents {
+            background-color: #f0f0f0;
+        }
+
+        .drive-link {
+            display: block;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+
+        .drive-link:hover {
+            transform: translateY(-5px);
+        }
+
+        .drive-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .doc-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .doc-category {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .doc-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .doc-category ul {
+            list-style: none;
+        }
+
+        .doc-category ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .doc-category ul li::before {
+            content: '►';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+
+        /* Campanhas */
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .campaign-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .campaign-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .campaign-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .campaign-card:hover .campaign-image img {
+            transform: scale(1.1);
+        }
+
+        .campaign-content {
+            padding: 1.5rem;
+        }
+
+        .campaign-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .campaign-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contato */
+        .contact {
+            background-color: #f0f0f0;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            min-width: 30px;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Área Admin */
+        .admin-section {
+            display: none;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-nav {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+
+        .admin-nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .admin-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .admin-nav ul li a:hover,
+        .admin-nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .admin-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .admin-sidebar {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 5px;
+        }
+
+        .admin-sidebar ul {
+            list-style: none;
+        }
+
+        .admin-sidebar ul li {
+            margin-bottom: 1rem;
+        }
+
+        .admin-sidebar ul li a {
+            display: block;
+            padding: 0.8rem;
+            background-color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .admin-sidebar ul li a:hover,
+        .admin-sidebar ul li a.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-left-color: var(--secondary-color);
+        }
+
+        .admin-main {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 5px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .admin-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .admin-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .action-btn {
+            padding: 0.3rem 0.8rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        .edit-btn {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 0;
+            }
+
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .admin-content {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header e Navegação -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">✝</span>
+                    <h1>Pastoral da Juventude - Diocese de Coari</h1>
+                </div>
+                <div class="mobile-menu">☰</div>
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#documentos">Documentos</a></li>
+                        <li><a href="#campanhas">Campanhas</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="#" id="admin-link">Admin</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção Hero/Início -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <h2>Pastoral da Juventude</h2>
+            <p>Jovens em missão, construindo uma Igreja viva e acolhedora para todos!</p>
+            <a href="#sobre" class="btn">Conheça Nossa Missão</a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nós</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>A Pastoral da Juventude é um organismo da Igreja Católica que tem como objetivo evangelizar os jovens, ajudando-os a descobrir e viver sua fé em Jesus Cristo.</p>
+                    <p>Nossa missão é formar jovens discípulos missionários, capazes de transformar a sociedade com os valores do Evangelho.</p>
+                    <p>Atuamos em diversas frentes: grupos de jovens, encontros de formação, retiros, ações sociais e muito mais.</p>
+                    <a href="#contato" class="btn">Participe Conosco</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://cnbbn2.com.br/site/wp-content/uploads/2018/08/Simbolo-Pastoral-da-Juventude.jpg" alt="Grupo de jovens da pastoral">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Documentos -->
+    <section id="documentos" class="documents">
+        <div class="container">
+            <div class="section-title">
+                <h2>Documentos</h2>
+            </div>
+            <a href="https://drive.google.com" target="_blank" class="drive-link">
+                <div class="drive-icon">📁</div>
+                <h3>Acesse Nossa Biblioteca no Google Drive</h3>
+                <p>Encontre todos os documentos, materiais de formação, músicas e recursos para seus encontros</p>
+            </a>
+            <div class="doc-categories">
+                <div class="doc-category">
+                    <h3>Formação</h3>
+                    <ul>
+                        <li>Roteiros de encontros</li>
+                        <li>Dinâmicas e jogos</li>
+                        <li>Textos para reflexão</li>
+                        <li>Materiais para coordenadores</li>
+                    </ul>
+                </div>
+                <div class="doc-category">
+                    <h3>Liturgia</h3>
+                    <ul>
+                        <li>Roteiros de celebrações</li>
+                        <li>Canto litúrgico</li>
+                        <li>Orientações para ministérios</li>
+                        <li>Textos bíblicos</li>
+                    </ul>
+                </div>
+                <div class="doc-category">
+                    <h3>Administrativo</h3>
+                    <ul>
+                        <li>Estatutos e regimentos</li>
+                        <li>Modelos de documentos</li>
+                        <li>Planejamento anual</li>
+                        <li>Relatórios e atas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Campanhas -->
+    <section id="campanhas" class="campaigns">
+        <div class="container">
+            <div class="section-title">
+                <h2>Campanhas e Eventos</h2>
+            </div>
+            <div class="campaigns-grid">
+                <div class="campaign-card">
+                    <div class="campaign-image">
+                        <img src="https://s2-g1.glbimg.com/wH_TUiK3kxnqK6TW8Gfxrxrw-pc=/0x0:1152x546/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2020/M/Q/utAfWcSvu0IjuY8q1ozw/legendap-02.jpg" alt="Retiro espiritual">
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Retiro de Formação</h3>
+                        <p class="campaign-date">15-17 de Novembro, 2024</p>
+                        <p>Um fim de semana de espiritualidade, formação e convivência para jovens que desejam aprofundar sua fé.</p>
+                        <a href="#" class="btn" style="margin-top: 1rem;">Inscreva-se</a>
+                    </div>
+                </div>
+                <div class="campaign-card">
+                    <div class="campaign-image">
+                        <img src="https://www.seas.am.gov.br/wp-content/uploads/2021/08/Seas-em-Novo-Remanso-Itacoatiara-foto-1-cestas-basicas-personagem-Amanda-Cunha-de-Araujo-by-Miguel-Almeida-1024x682.jpg" alt="Ação social">
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Mutirão de Solidariedade</h3>
+                        <p class="campaign-date">25 de Novembro, 2024</p>
+                        <p>Junte-se a nós para levar alegria e assistência a comunidades carentes da nossa região.</p>
+                        <a href="#" class="btn" style="margin-top: 1rem;">Participe</a>
+                    </div>
+                </div>
+                <div class="campaign-card">
+                    <div class="campaign-image">
+                        <img src="https://noticias-pe.laiglesiadejesucristo.org/media/960x540/Festival-2025-2.jpg" alt="Festival jovem">
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Festival Jovem de Música</h3>
+                        <p class="campaign-date">10 de Dezembro, 2024</p>
+                        <p>Um dia inteiro de música, louvor e integração entre os jovens de nossa diocese.</p>
+                        <a href="#" class="btn" style="margin-top: 1rem;">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contato</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Entre em Contato Conosco</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Endereço</h4>
+                            <p>Rua Gilberto Mestrinho, n° 227, Centro<br>Diocese de Coari</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>(11) 9999-9999</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h4>E-mail</h4>
+                            <p>contato@pastoraljuvenil.org.br</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <h4>Horário de Atendimento</h4>
+                            <p>Segunda a Sexta: 9h às 17h<br>Sábado: 9h às 12h</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Envie uma Mensagem</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pastoral da Juventude</h3>
+                    <p>Conheça nossas redes sociais!</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="YouTube">▶️</a>
+                        <a href="#" title="WhatsApp">📱</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#documentos">Documentos</a></li>
+                        <li><a href="#campanhas">Campanhas</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Nossos Grupos</h3>
+                    <ul>
+                        <li><a href="#">Grupo de Jovens</a></li>
+                        <li><a href="#">Cantos amazonicos</a></li>
+                        <li><a href="#">Grupo de Jovens</a></li>
+                        <li><a href="#">Voluntariado Social</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Pastoral da Juventude - Diocese de Coari. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Área Administrativa -->
+    <section id="admin" class="admin-section">
+        <div class="container">
+            <div class="admin-login" id="admin-login">
+                <div class="section-title">
+                    <h2>Área Administrativa</h2>
+                </div>
+                <div class="contact-form">
+                    <h3>Login</h3>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username">Usuário</label>
+                            <input type="text" id="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" id="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn">Entrar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="admin-panel" id="admin-panel">
+                <div class="section-title">
+                    <h2>Painel Administrativo</h2>
+                </div>
+                <div class="admin-nav">
+                    <ul>
+                        <li><a href="#dashboard" class="active">Dashboard</a></li>
+                        <li><a href="#content">Conteúdo</a></li>
+                        <li><a href="#campaigns-admin">Campanhas</a></li>
+                        <li><a href="#users">Usuários</a></li>
+                        <li><a href="#settings">Configurações</a></li>
+                        <li><a href="#" id="logout">Sair</a></li>
+                    </ul>
+                </div>
+                <div class="admin-content">
+                    <div class="admin-sidebar">
+                        <ul>
+                            <li><a href="#" class="active">Página Inicial</a></li>
+                            <li><a href="#">Sobre Nós</a></li>
+                            <li><a href="#">Documentos</a></li>
+                            <li><a href="#">Campanhas</a></li>
+                            <li><a href="#">Contato</a></li>
+                            <li><a href="#">Banner Principal</a></li>
+                            <li><a href="#">Redes Sociais</a></li>
+                        </ul>
+                    </div>
+                    <div class="admin-main">
+                        <h3>Gerenciar Conteúdo</h3>
+                        <p>Selecione uma opção no menu lateral para editar o conteúdo do site.</p>
+                        
+                        <h4 style="margin-top: 2rem;">Conteúdos Recentes</h4>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Tipo</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Retiro de Formação</td>
+                                    <td>Campanha</td>
+                                    <td>15/11/2023</td>
+                                    <td>
+                                        <button class="action-btn edit-btn">Editar</button>
+                                        <button class="action-btn delete-btn">Excluir</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mutirão de Solidariedade</td>
+                                    <td>Campanha</td>
+                                    <td>25/11/2023</td>
+                                    <td>
+                                        <button class="action-btn edit-btn">Editar</button>
+                                        <button class="action-btn delete-btn">Excluir</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nossa História</td>
+                                    <td>Página</td>
+                                    <td>10/10/2023</td>
+                                    <td>
+                                        <button class="action-btn edit-btn">Editar</button>
+                                        <button class="action-btn delete-btn">Excluir</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Menu mobile
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Navegação suave
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Link para área administrativa
+        document.getElementById('admin-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('admin').style.display = 'block';
+            window.scrollTo({
+                top: document.getElementById('admin').offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+
+        // Simulação de login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simulação simples de autenticação
+            if(username === 'admin' && password === 'admin') {
+                document.getElementById('admin-login').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+            } else {
+                alert('Usuário ou senha incorretos!');
+            }
+        });
+
+        // Logout
+        document.getElementById('logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('admin-login').style.display = 'block';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
+
+        // Formulário de contato
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset();
+        });
+    </script>
+</body>
+</html> 
